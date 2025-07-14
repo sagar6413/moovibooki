@@ -41,7 +41,7 @@ spring:
         enabled: true
       redisson:
         single-server-config:
-          connection-pool-size: 10
+          connection-pool-size: 5
           connection-minimum-idle-size: 2
           connect-timeout: 10000
           timeout: 3000
