@@ -13,7 +13,7 @@ FROM eclipse-temurin:21-jre-jammy AS runtime
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 WORKDIR /app
 COPY --from=build --chown=appuser:appuser /app/target/*.jar app.jar
-VOLUME /app/logs
+# VOLUME /app/logs
 ARG SERVER_PORT=8080
 EXPOSE ${SERVER_PORT}
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
