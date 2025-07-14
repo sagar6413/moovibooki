@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: movie-booking-concurrent-application
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD:} # Optional, empty by default
+      ssl:
+        enabled: true
+#   sql:
+#     init:
+#       mode: always
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+cloudinary:
+  cloud_name: ${CLOUDINARY_CLOUD_NAME}
+  api_key: ${CLOUDINARY_API_KEY}
+  api_secret: ${CLOUDINARY_API_SECRET}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expirationMs: ${JWT_EXPIRATION} # 24 hours
+    refreshExpirationMs: ${JWT_REFRESH_EXPIRATION} # 7 days
+  token:
+    verification:
+      duration-minutes: 15
+    reset-password:
+      duration-minutes: 10
+  frontend:
+    base-url: https://whipsr-frontend.vercel.app
+  oauth2:
+    redirectUri: ${OAUTH2_REDIRECT_URI}
+  email:
+    verification:
+      expirationMs: ${EMAIL_VERIFICATION_EXPIRATION} # 1 hour
+      baseUrl: ${EMAIL_VERIFICATION_BASE_URL}
+    passwordReset:
+      expirationMs: ${PASSWORD_RESET_EXPIRATION} # 1 hour
+      baseUrl: ${PASSWORD_RESET_BASE_URL}
+  cors:
+    allowedOrigins: ${CORS_ALLOWED_ORIGINS}
+  api:
+    error:
+      base-uri: ${API_ERROR_BASE_URI}
+  image:
+    max-size: 10485760 # 10MB
+    allowed-formats: jpg,jpeg,png,gif,webp
