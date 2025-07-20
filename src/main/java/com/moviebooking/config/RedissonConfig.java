@@ -22,7 +22,12 @@ public class RedissonConfig {
     public RedissonClient redissonClient() {
         Config config = new Config();
         String address = "redis://" + redisHost + ":" + redisPort;
-        config.useSingleServer().setAddress(address);
+        config.useSingleServer()
+                .setAddress(address)
+                .setConnectionPoolSize(5)
+                .setConnectionMinimumIdleSize(2)
+                .setConnectTimeout(10000)
+                .setTimeout(3000);
         if (redisPassword != null && !redisPassword.isEmpty()) {
             config.useSingleServer().setPassword(redisPassword);
         }
